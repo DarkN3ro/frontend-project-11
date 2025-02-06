@@ -1,10 +1,14 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
-    entry: path.resolve(__dirname, 'src', 'index.js'),
-    output: {
-      path: path.resolve(__dirname, 'dist'),
-      clean: true,
-      filename: 'index.[contenthash].js',
-    },
-  };
+  entry: './src/index.js',
+  output: {
+    filename: 'index.js',
+    path: path.resolve(__dirname, 'dist')
+  },
+  devServer: {
+    static: path.resolve(__dirname, 'dist'),
+    port: 8080,
+    hot: true
+  }
+};

@@ -1,3 +1,4 @@
-const mult = (a, b) => a * b;
+import './styles.scss';
+import 'bootstrap';
 
-console.log(mult(2, 4));
+console.log('Hello, World!');

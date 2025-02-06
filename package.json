@@ -4,21 +4,31 @@
   "description": "[![Actions Status](https://github.com/DarkN3ro/frontend-project-11/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/DarkN3ro/frontend-project-11/actions)",
   "main": "index.js",
   "scripts": {
-    "start": "webpack server",
-    "build-dev": "webpack",
-    "build-prod": "webpack --node-env=prodaction",
-    "clear": "rd /s /q/ dist"
+    "start": "webpack serve --mode development",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Felve",
   "license": "ISC",
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@eslint/create-config": "^1.0.0",
-    "eslint": "^8.57.0",
+    "@eslint/js": "^9.19.0",
+    "@webpack-cli/generators": "^3.0.7",
+    "autoprefixer": "^10.4.20",
+    "css-loader": "^7.1.2",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.31.0",
+    "globals": "^15.14.0",
     "html-webpack-plugin": "^5.6.3",
+    "postcss-loader": "^8.1.1",
+    "sass": "^1.84.0",
+    "sass-loader": "^16.0.4",
+    "style-loader": "^4.0.0",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.0"
