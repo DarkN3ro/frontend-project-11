@@ -1,0 +1,7 @@
+name: main
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+      - uses: actions/checkout@v4
+      - run: make hello
