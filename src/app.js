@@ -1,6 +1,7 @@
 import * as yup from 'yup';
 import i18next, { t } from 'i18next';
 import resources from '../locales/index.js';
+import createPostElements from '../posts.js';
 
 await i18next.init({
   lng: 'ru',
@@ -54,8 +55,11 @@ const requestRss = (urlNames) => {
       renderError(t('validate.rssSuccess'), true);
       input.value = '';
       input.focus();
+
+      createPostElements(data);
     })
     .catch((err) => {
+      input.classList.add('is-invalid');
       renderError(err.message, false);
     });
 };
