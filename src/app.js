@@ -1,7 +1,9 @@
 import * as yup from 'yup';
 import i18next, { t } from 'i18next';
 import resources from '../locales/index.js';
-import createPostElements from '../posts.js';
+import createPostElements from '../createPosts.js';
+import createFeedsElements from '../feeds.js';
+import createPost from '../post.js';
 
 await i18next.init({
   lng: 'ru',
@@ -9,6 +11,7 @@ await i18next.init({
 });
 
 const existingRssLinks = [];
+const lastInformationOfFeeds = {};
 
 const schema = yup.object().shape({
   url: yup.string()
@@ -32,6 +35,38 @@ const renderError = (errorMessage, success) => {
   elements.feedback.classList.add(success ? 'text-success' : 'text-danger');
   elements.feedback.textContent = errorMessage;
 };
+let currentId = 0;
+
+const generateId = () => {
+  currentId += 1;
+  return currentId;
+};
+const id = generateId();
+
+const startCheckingUpdates = (url) => {
+  const checkForUpdates = () => {
+    fetch(`https://allorigins.hexlet.app/get?url=${encodeURIComponent(url)}`, { cache: 'no-store' })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(t('validate.rssRequest'));
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const { contents } = data;
+
+        if (lastInformationOfFeeds[url] !== contents) {
+          lastInformationOfFeeds[url] = contents;
+          createPostElements(data);
+        }
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
+    setTimeout(checkForUpdates, 5000);
+  };
+  checkForUpdates();
+};
 
 const requestRss = (urlNames) => {
   const { input } = elements;
@@ -51,16 +86,22 @@ const requestRss = (urlNames) => {
       }
 
       existingRssLinks.push(urlNames);
+      lastInformationOfFeeds[urlNames] = contents;
       input.classList.add('is-valid');
       renderError(t('validate.rssSuccess'), true);
       input.value = '';
       input.focus();
 
+      createPost();
       createPostElements(data);
+      createFeedsElements();
     })
     .catch((err) => {
       input.classList.add('is-invalid');
       renderError(err.message, false);
+    })
+    .finally(() => {
+      startCheckingUpdates(urlNames);
     });
 };
 
