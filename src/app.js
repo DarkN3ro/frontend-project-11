@@ -35,13 +35,6 @@ const renderError = (errorMessage, success) => {
   elements.feedback.classList.add(success ? 'text-success' : 'text-danger');
   elements.feedback.textContent = errorMessage;
 };
-let currentId = 0;
-
-const generateId = () => {
-  currentId += 1;
-  return currentId;
-};
-const id = generateId();
 
 const startCheckingUpdates = (url) => {
   const checkForUpdates = () => {
