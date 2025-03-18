@@ -1,3 +1,5 @@
+import buttonsEvents from './buttonsEvents.js';
+
 const openDisplayFeeds = (title, description, link, postsAttr) => {
   const body = document.querySelector('body');
   body.classList.add('modal-open');
@@ -17,19 +19,7 @@ const openDisplayFeeds = (title, description, link, postsAttr) => {
   postsAttr.classList.add('fw-normal', 'link-secondary');
 
   const buttons = document.querySelectorAll('button[data-bs-dismiss="modal"]');
-  buttons.forEach((button) => {
-    button.addEventListener('click', (e) => {
-      e.preventDefault();
-      body.classList.remove('modal-open');
-      body.removeAttribute('style');
-      divModal.classList.remove('show');
-      divModal.removeAttribute('style');
-      divModal.style = 'display: none;';
-      divModal.removeAttribute('aria-modal');
-      divModal.setAttribute('aria-hidden', 'true');
-      divModal.removeAttribute('role');
-    });
-  });
+  buttonsEvents(buttons, body, divModal);
 };
 
 export default openDisplayFeeds;
