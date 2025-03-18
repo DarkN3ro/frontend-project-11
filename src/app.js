@@ -1,9 +1,10 @@
 import * as yup from 'yup';
 import i18next, { t } from 'i18next';
 import resources from '../locales/index.js';
-import createPostElements from '../createPosts.js';
-import createFeedsElements from '../feeds.js';
+import createPostElements from '../postsElements.js';
+import createFeedsElements from '../feedsElements.js';
 import createPost from '../post.js';
+import createFeeds from '../feeds.js';
 
 await i18next.init({
   lng: 'ru',
@@ -54,7 +55,11 @@ const startCheckingUpdates = (url) => {
         }
       })
       .catch((err) => {
-        console.error(err.message);
+        if (err.message === 'Failed to fetch') {
+          renderError(t('validate.failedToFetch'), false);
+        } else {
+          console.error(err.message);
+        }
       });
     setTimeout(checkForUpdates, 5000);
   };
@@ -86,12 +91,14 @@ const requestRss = (urlNames) => {
       input.focus();
 
       createPost();
+      createFeeds();
       createPostElements(data);
-      createFeedsElements();
+      createFeedsElements(data);
     })
     .catch((err) => {
       input.classList.add('is-invalid');
-      renderError(err.message, false);
+      const errorMessage = err.message === 'Failed to fetch' ? t('validate.failedToFetch') : err.message;
+      renderError(errorMessage, false);
     })
     .finally(() => {
       startCheckingUpdates(urlNames);

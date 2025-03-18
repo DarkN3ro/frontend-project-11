@@ -6,6 +6,7 @@ export default {
       rssSuccess: 'RSS успешно загружен',
       rssRequired: 'Заполните это поле.',
       rssRequest: 'Ресурс не содержит валидный RSS',
+      failedToFetch: 'Ошибка сети',
     },
   },
 };

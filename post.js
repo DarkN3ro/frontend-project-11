@@ -1,5 +1,9 @@
 const createPost = () => {
   const posts = document.querySelector('.posts');
+  if (posts.querySelectorAll('.card').length > 0) {
+    return;
+  }
+
   const divCardBorderPosts = document.createElement('div');
   divCardBorderPosts.classList.add('card', 'border-0');
 
