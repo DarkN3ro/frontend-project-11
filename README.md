@@ -20,3 +20,5 @@ A front-end application that allows you to add and monitor RSS feeds.
 `make build` - production build
 
 `make lint` - check by linter
+
+`make test` - testing the app
