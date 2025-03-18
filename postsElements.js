@@ -23,7 +23,7 @@ const createPostElements = (data) => {
       const id = generateId();
 
       const postsLi = document.createElement('li');
-      postsLi.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-item-start', 'border-0', 'border-end-0');
+      postsLi.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start', 'border-0', 'border-end-0');
 
       const postsAttr = document.createElement('a');
       postsAttr.href = link;
@@ -37,6 +37,8 @@ const createPostElements = (data) => {
       postsButton.classList.add('btn', 'btn-outline-primary', 'btn-sm');
       postsButton.setAttribute('data-id', id);
       postsButton.type = 'button';
+      postsButton.setAttribute('data-bs-toggle', 'modal');
+      postsButton.setAttribute('data-bs-target', '#modal');
       postsButton.textContent = 'Просмотр';
       postsLi.appendChild(postsAttr);
       postsLi.appendChild(postsButton);
