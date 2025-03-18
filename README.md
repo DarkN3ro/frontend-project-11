@@ -3,6 +3,20 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/aec82dbeaaeb5ac81060/maintainability)](https://codeclimate.com/github/DarkN3ro/frontend-project-11/maintainability)
 
-## Link
+# RSS Aggregator
 
-- https://frontend-project-11-dun-iota.vercel.app/
+### [Application Link](https://frontend-project-11-dun-iota.vercel.app/)
+
+A front-end application that allows you to add and monitor RSS feeds. 
+
+- Stack: JS, Bootstrap, Webpack, Vercel
+
+### Command
+
+`make install` - install
+
+`make dev` - run in development mode
+
+`make build` - production build
+
+`make lint` - check by linter
