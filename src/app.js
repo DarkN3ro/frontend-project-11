@@ -25,8 +25,8 @@ const schema = yup.object().shape({
 });
 
 const elements = {
-  button: document.querySelector('[aria-label="add"]'),
-  input: document.querySelector('#url-input'),
+  button: document.querySelector('button[type="submit"]'),
+  input: document.querySelector('input[aria-label="url"]'),
   form: document.querySelector('.rss-form'),
   feedback: document.querySelector('.feedback'),
 };
