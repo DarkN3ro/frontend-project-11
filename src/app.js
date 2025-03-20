@@ -77,15 +77,8 @@ const app = async () => {
         return response.json();
       })
       .then((data) => {
-        const { contents } = data;
-
-        const isValidRss = /<rss[\s\S]*?>|<feed[\s\S]*?>/.test(contents);
-        if (!isValidRss) {
-          throw new Error(t('validate.rssRequest'));
-        }
-
         existingRssLinks.push(urlNames);
-        lastInformationOfFeeds[urlNames] = contents;
+        lastInformationOfFeeds[urlNames] = data.contents;
         input.classList.add('is-valid');
         renderError(t('validate.rssSuccess'), true);
         input.value = '';
