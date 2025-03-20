@@ -16,7 +16,7 @@ const compat = new FlatCompat({
 
 export default [
   {
-    ignorePatterns: ['dist/'],
+    ignores: ['dist/'],
   },
   {
     languageOptions: {
