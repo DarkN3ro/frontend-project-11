@@ -108,7 +108,6 @@ const app = async () => {
 
   elements.form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    e.stopPropagation();
 
     const { input } = elements;
 
