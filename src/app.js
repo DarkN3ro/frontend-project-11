@@ -1,10 +1,10 @@
 import * as yup from 'yup';
 import i18next, { t } from 'i18next';
-import resources from '../locales/index.js';
-import createPostElements from '../postsElements.js';
-import createFeedsElements from '../feedsElements.js';
-import createPost from '../post.js';
-import createFeeds from '../feeds.js';
+import resources from './locales/index.js';
+import createPostElements from './view/posts/postsElements.js';
+import createFeedsElements from './view/feeds/feedsElements.js';
+import createPost from './view/posts/post.js';
+import createFeeds from './view/feeds/feeds.js';
 
 await i18next.init({
   lng: 'ru',

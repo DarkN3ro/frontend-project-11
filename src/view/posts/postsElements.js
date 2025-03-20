@@ -1,4 +1,4 @@
-import openDisplayFeeds from './displayFeeds.js';
+import openDisplayFeeds from '../feeds/displayFeeds.js';
 import generateId from './counter.js';
 
 const postsSet = new Set();
