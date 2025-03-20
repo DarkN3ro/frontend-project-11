@@ -106,7 +106,7 @@ const requestRss = (urlNames) => {
 };
 
 const app = () => {
-  elements.form.addEventListener('submit', (e) => {
+  elements.form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const { input } = elements;
