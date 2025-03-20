@@ -1,4 +1,4 @@
-import buttonsEvents from '../buttonsEvents.js';
+import buttonsEvents from '../posts/buttonsEvents.js';
 
 const openDisplayFeeds = (title, description, link, postsAttr) => {
   const body = document.querySelector('body');
