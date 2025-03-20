@@ -16,7 +16,6 @@ const compat = new FlatCompat({
 
 export default [
   {
-    ignores: ['dist'],
     languageOptions: {
       globals: {
         ...globals.node,
@@ -34,6 +33,7 @@ export default [
     rules: {
       ...importPlugin.configs.recommended.rules,
     },
+    ignores: ['dist/'],
   },
   ...compat.extends('airbnb-base'),
   {
