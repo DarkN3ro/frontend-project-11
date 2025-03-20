@@ -67,31 +67,43 @@ const app = async () => {
     checkForUpdates();
   };
 
-  const requestRss = async (urlNames) => {
+  const requestRss = (urlNames) => {
     const { input } = elements;
-    try {
-      const response = await fetch(`https://allorigins.hexlet.app/get?url=${encodeURIComponent(urlNames)}`, { cache: 'no-store' });
-      if (!response.ok) {
-        throw new Error(t('validate.rssRequest'));
-      }
-      const data = await response.json();
-      existingRssLinks.push(urlNames);
-      lastInformationOfFeeds[urlNames] = data.contents;
-      input.classList.add('is-valid');
-      renderError(t('validate.rssSuccess'), true);
-      input.value = '';
-      input.focus();
-      createPost();
-      createFeeds();
-      createPostElements(data);
-      createFeedsElements(data);
-    } catch (err) {
-      input.classList.add('is-invalid');
-      const errorMessage = err.message === 'Failed to fetch' ? t('validate.failedToFetch') : err.message;
-      renderError(errorMessage, false);
-    } finally {
-      startCheckingUpdates(urlNames);
-    }
+    fetch(`https://allorigins.hexlet.app/get?url=${encodeURIComponent(urlNames)}`, { cache: 'no-store' })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(t('validate.rssRequest'));
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const { contents } = data;
+
+        const isValidRss = /<rss[\s\S]*?>|<feed[\s\S]*?>/.test(contents);
+        if (!isValidRss) {
+          throw new Error(t('validate.rssRequest'));
+        }
+
+        existingRssLinks.push(urlNames);
+        lastInformationOfFeeds[urlNames] = contents;
+        input.classList.add('is-valid');
+        renderError(t('validate.rssSuccess'), true);
+        input.value = '';
+        input.focus();
+
+        createPost();
+        createFeeds();
+        createPostElements(data);
+        createFeedsElements(data);
+      })
+      .catch((err) => {
+        input.classList.add('is-invalid');
+        const errorMessage = err.message === 'Failed to fetch' ? t('validate.failedToFetch') : err.message;
+        renderError(errorMessage, false);
+      })
+      .finally(() => {
+        startCheckingUpdates(urlNames);
+      });
   };
 
   elements.form.addEventListener('submit', async (e) => {
