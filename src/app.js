@@ -106,7 +106,8 @@ const requestRss = (urlNames) => {
 };
 
 const app = () => {
-  elements.form.addEventListener('submit', async (e) => {
+  const { form } = elements;
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const { input } = elements;
@@ -114,14 +115,13 @@ const app = () => {
     const urlValue = input.value;
     input.classList.remove('is-invalid', 'is-valid');
 
-    schema.validate({ url: urlValue })
-      .then(() => {
-        requestRss(urlValue);
-      })
-      .catch((err) => {
-        input.classList.add('is-invalid');
-        renderError(err.message, false);
-      });
+    try {
+      await schema.validate({ url: urlValue });
+      requestRss(urlValue);
+    } catch (err) {
+      input.classList.add('is-invalid');
+      renderError(err.message, false);
+    }
   });
 };
 
