@@ -40,7 +40,7 @@ const app = async () => {
 
   const startCheckingUpdates = (url) => {
     const checkForUpdates = () => {
-      fetch(`https://allorigins.hexlet.app/get?url=${encodeURIComponent(url)}`, { cache: 'no-store' })
+      fetch(`https://allorigins.hexlet.app/get?url=${encodeURIComponent(url)}&disableCache=true`, { cache: 'no-store' })
         .then((response) => {
           if (!response.ok) {
             throw new Error(t('validate.rssRequest'));
@@ -69,7 +69,7 @@ const app = async () => {
 
   const requestRss = (urlNames) => {
     const { input } = elements;
-    fetch(`https://allorigins.hexlet.app/get?url=${encodeURIComponent(urlNames)}`, { cache: 'no-store' })
+    fetch(`https://allorigins.hexlet.app/get?url=${encodeURIComponent(urlNames)}&disableCache=true`, { cache: 'no-store' })
       .then((response) => {
         if (!response.ok) {
           throw new Error(t('validate.rssRequest'));
