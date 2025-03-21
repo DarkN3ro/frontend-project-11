@@ -16,6 +16,7 @@
     "i18next": "^24.2.2",
     "lodash": "^4.17.21",
     "on-change": "^5.0.1",
+    "uuid": "^11.1.0",
     "yup": "^1.6.1"
   },
   "devDependencies": {

@@ -1,8 +1,7 @@
 import * as yup from 'yup';
 import i18next, { t } from 'i18next';
 import resources from './locales/index.js';
-import createPostElements from './view/posts/postsElements.js';
-import createFeedsElements from './view/feeds/feedsElements.js';
+import parseData from './view/parser.js';
 import createPost from './view/posts/post.js';
 import createFeeds from './view/feeds/feeds.js';
 
@@ -52,7 +51,7 @@ const app = async () => {
 
           if (lastInformationOfFeeds[url] !== contents) {
             lastInformationOfFeeds[url] = contents;
-            createPostElements(data);
+            parseData(data);
           }
         })
         .catch((err) => {
@@ -93,8 +92,7 @@ const app = async () => {
 
         createPost();
         createFeeds();
-        createPostElements(data);
-        createFeedsElements(data);
+        parseData(data);
       })
       .catch((err) => {
         input.classList.add('is-invalid');

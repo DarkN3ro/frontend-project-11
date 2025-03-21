@@ -1,14 +1,12 @@
-const createFeedsElements = (data) => {
-  const rssText = data.contents;
-  const parser = new DOMParser();
-  const xmlDoc = parser.parseFromString(rssText, 'application/xml');
-  const items = Array.from(xmlDoc.getElementsByTagName('channel'));
-  const feeds = document.querySelector('.feeds');
-  const feedsUl = feeds.querySelector('ul');
+const feedsSet = new Set();
 
-  items.forEach((item) => {
-    const title = item.getElementsByTagName('title')[0].textContent;
-    const description = item.getElementsByTagName('description')[0].textContent;
+const createFeedsElements = (title, description) => {
+  const feedKey = title + description;
+  if (!feedsSet.has(feedKey)) {
+    feedsSet.add(feedKey);
+
+    const feeds = document.querySelector('.feeds');
+    const feedsUl = feeds.querySelector('ul');
 
     const feedsLi = document.createElement('li');
     feedsLi.classList.add('list-group-item', 'border-0', 'border-end-0');
@@ -21,7 +19,7 @@ const createFeedsElements = (data) => {
     feedsLi.appendChild(feedsH3);
     feedsLi.appendChild(feedsAttrP);
     feedsUl.insertBefore(feedsLi, feedsUl.firstChild);
-  });
+  }
 };
 
 export default createFeedsElements;
