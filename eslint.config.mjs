@@ -33,7 +33,7 @@ export default [
     rules: {
       ...importPlugin.configs.recommended.rules,
     },
-    ignores: ['/dist/*'],
+    ignores: ['dist/*'],
   },
   ...compat.extends('airbnb-base'),
   {
